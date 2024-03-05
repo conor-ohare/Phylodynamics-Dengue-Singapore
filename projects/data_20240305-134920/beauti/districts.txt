@@ -1,0 +1,77 @@
+traits	districts
+EHIE01643Y19	Bedok, Upper East Coast, Eastwood, Kew Drive
+EHIE1663Y21	Unknown
+EHIE1956Y21	Unknown
+EHIE1524Y21	Unknown
+EHIE1837Y21	Unknown
+EHIE1259Y21	Bedok, Upper East Coast, Eastwood, Kew Drive
+EHIE1710Y21	Tampines, Pasir Ris
+EHIE1145Y21	Jurong
+EHIE1556Y21	Unknown
+EHIE1182Y21	Unknown
+EHIE2512Y21	Unknown
+EHIE2315Y21	Unknown
+EHIE2021Y21	Unknown
+EHIE2717Y21	Unknown
+EHIE2535Y21	Unknown
+EHIE2540Y21	Unknown
+EHIE2778Y21	Unknown
+EHIE2091Y21	Unknown
+EHIE3866Y21	Unknown
+EHIE3808Y21	Unknown
+EHIE3654Y21	Unknown
+EHIE3019Y21	Unknown
+EHIE3485Y21	Unknown
+EHIE3378Y21	Unknown
+EHIE4104Y21	Unknown
+EHIE4825Y21	Unknown
+EHIE5854Y21	Unknown
+EHIE5224Y21	Unknown
+EHIE5795Y21	Unknown
+EHIE7708Y21	Unknown
+EHIE9048Y21	Unknown
+EHIE9718Y21	Unknown
+EHIE10925Y21	Jurong
+EHIE10080Y21	Jurong
+EHIE12783Y21	Jurong
+EHIE15506Y21	Jurong
+EHIE18867Y21	Orchard, Cairnhill, River Valley
+EHIE21759Y21	Serangoon Garden, Hougang, Punggol
+EHIE23290Y21	Ardmore, Bukit Timah, Holland Road, Tanglin
+EHIE26991Y21	Ardmore, Bukit Timah, Holland Road, Tanglin
+EHIE1926Y21	Little India
+EHIE7100Y21	Tampines, Pasir Ris
+EHIE9416Y21	Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang
+EHIE15102Y21	Serangoon Garden, Hougang, Punggol
+EHIE18141Y21	Unknown
+EHIE21389Y21	Ardmore, Bukit Timah, Holland Road, Tanglin
+EHIE22785Y21	Ardmore, Bukit Timah, Holland Road, Tanglin
+EHIE23952Y21	Ardmore, Bukit Timah, Holland Road, Tanglin
+EHIE24241Y21	Unknown
+EHIE25262Y21	Unknown
+EHIE25535Y21	Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang
+EHIE25119Y21	Little India
+EHIE26535Y21	Unknown
+EHIE27238Y21	Ardmore, Bukit Timah, Holland Road, Tanglin
+EHIE28933Y21	Ardmore, Bukit Timah, Holland Road, Tanglin
+EHIE34659Y21	Serangoon Garden, Hougang, Punggol
+EHIE40357Y21	Serangoon Garden, Hougang, Punggol
+EHIE41841Y21	Little India
+EHIE43326Y21	Serangoon Garden, Hougang, Punggol
+EHIE47223Y21	Bedok, Upper East Coast, Eastwood, Kew Drive
+EHIE50791Y21	Little India
+EHIE1505Y21	Bedok, Upper East Coast, Eastwood, Kew Drive
+EHIE1044Y21	Bedok, Upper East Coast, Eastwood, Kew Drive
+EHIE1237Y21	Unknown
+EHIE2108Y21	Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang
+EHIE2238Y21	Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang
+EHIE2185Y21	Bedok, Upper East Coast, Eastwood, Kew Drive
+EHIE3224Y21	Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang
+EHIE3969Y21	Ardmore, Bukit Timah, Holland Road, Tanglin
+EHIE3286Y21	Katong, Joo Chiat, Amber Road
+EHIE4846Y21	Bedok, Upper East Coast, Eastwood, Kew Drive
+EHIE4162Y21	Serangoon Garden, Hougang, Punggol
+EHIE5961Y21	Bedok, Upper East Coast, Eastwood, Kew Drive
+EHIE5489Y21	Bedok, Upper East Coast, Eastwood, Kew Drive
+EHIE8451Y21	Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang
+EHIE9714Y21	Serangoon Garden, Hougang, Punggol

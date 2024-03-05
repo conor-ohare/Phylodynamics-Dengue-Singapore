@@ -1,0 +1,77 @@
+Year,Sample origin,Sample ID,E-WEEK,Receipt date (Diagnostics),Postal Code,District,Estimate Address,Travel History,Fever Duration (Day),Serotype,Genotype,Clade,Cluster Size,Tip.Dates,Latitude,Longitude
+2019,Human,EHIE01643Y19,EW01,2019-01-02,471613.0,"Bedok, Upper East Coast, Eastwood, Kew Drive",Bedok Reservoir Road,,2.0,D2,Cosmopolitan,cldIb2013,77.0,2019.005,,
+2021,Human,EHIE1663Y21,EW01,2021-01-04,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.011,,
+2021,Human,EHIE1956Y21,EW01,2021-01-05,0,Unknown,No Address,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.014,,
+2021,Human,EHIE1524Y21,EW01,2021-01-05,0,Unknown,No Address,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.014,,
+2021,Human,EHIE1837Y21,EW01,2021-01-06,0,Unknown,No Address,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.016,,
+2021,Human,EHIE1259Y21,EW01,2021-01-06,468646,"Bedok, Upper East Coast, Eastwood, Kew Drive",Jalan Kathi,,3.0,D2,Cosmopolitan,cldIb2013,5.0,2021.016,,
+2021,Human,EHIE1710Y21,EW01,2021-01-07,518170,"Tampines, Pasir Ris",Pasir Ris Grove,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.019,,
+2021,Human,EHIE1145Y21,EW01,2021-01-07,628920,Jurong,Kian Teck Avenue,,1.0,D2,Cosmopolitan,cldIb2013,18.0,2021.019,,
+2021,Human,EHIE1556Y21,EW01,2021-01-08,0,Unknown,No Address,,2.0,D2,Cosmopolitan,cldIb2013,0.0,2021.022,,
+2021,Human,EHIE1182Y21,EW01,2021-01-08,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.022,,
+2021,Human,EHIE2512Y21,EW02,2021-01-11,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.03,,
+2021,Human,EHIE2315Y21,EW02,2021-01-11,0,Unknown,No Address,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.03,,
+2021,Human,EHIE2021Y21,EW02,2021-01-11,0,Unknown,No Address,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.03,,
+2021,Human,EHIE2717Y21,EW02,2021-01-12,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.033,,
+2021,Human,EHIE2535Y21,EW02,2021-01-12,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.033,,
+2021,Human,EHIE2540Y21,EW02,2021-01-14,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.038,,
+2021,Human,EHIE2778Y21,EW02,2021-01-14,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.038,,
+2021,Human,EHIE2091Y21,EW02,2021-01-14,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.038,,
+2021,Human,EHIE3866Y21,EW03,2021-01-19,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.052,,
+2021,Human,EHIE3808Y21,EW03,2021-01-19,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.052,,
+2021,Human,EHIE3654Y21,EW03,2021-01-19,0,Unknown,No Address,,2.0,D2,Cosmopolitan,cldIb2013,0.0,2021.052,,
+2021,Human,EHIE3019Y21,EW03,2021-01-19,0,Unknown,No Address,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.052,,
+2021,Human,EHIE3485Y21,EW03,2021-01-20,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.055,,
+2021,Human,EHIE3378Y21,EW03,2021-01-20,0,Unknown,No Address,,2.0,D2,Cosmopolitan,cldIb2013,0.0,2021.055,,
+2021,Human,EHIE4104Y21,EW04,2021-01-25,0,Unknown,No Address,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.068,,
+2021,Human,EHIE4825Y21,EW04,2021-01-26,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.071,,
+2021,Human,EHIE5854Y21,EW05,2021-02-01,0,Unknown,No Address,,2.0,D2,Cosmopolitan,cldIb2013,0.0,2021.088,,
+2021,Human,EHIE5224Y21,EW05,2021-02-01,0,Unknown,No Address,,1.0,D2,Cosmopolitan,cldIb2013,0.0,2021.088,,
+2021,Human,EHIE5795Y21,EW05,2021-02-03,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.093,,
+2021,Human,EHIE7708Y21,EW07,2021-02-17,0,Unknown,No Address,,2.0,D2,Cosmopolitan,cldIb2013,0.0,2021.131,,
+2021,Human,EHIE9048Y21,EW09,2021-03-01,0,Unknown,No Address,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.164,,
+2021,Human,EHIE9718Y21,EW09,2021-03-02,0,Unknown,No Address,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.167,,
+2021,Human,EHIE10925Y21,EW10,2021-03-09,628920,Jurong,Kian Teck Avenue,,4.0,D2,Cosmopolitan,cldIb2013,35.0,2021.186,,
+2021,Human,EHIE10080Y21,EW10,2021-03-09,628920,Jurong,Kian Teck Avenue,,0.0,D2,Cosmopolitan,cldIb2013,35.0,2021.186,,
+2021,Human,EHIE12783Y21,EW12,2021-03-23,628900,Jurong,Kian Teck Avenue,,1.0,D2,Cosmopolitan,cldIb2013,42.0,2021.225,,
+2021,Human,EHIE15506Y21,EW15,2021-04-14,628790,Jurong,Kian Teck Road,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.285,,
+2021,Human,EHIE18867Y21,EW18,2021-05-03,229210,"Orchard, Cairnhill, River Valley",Hooper Road,,3.0,D2,Cosmopolitan,cldIb2013,0.0,2021.337,,
+2021,Human,EHIE21759Y21,EW21,2021-05-27,530122,"Serangoon Garden, Hougang, Punggol",Hougang Avenue 1,,0.0,D2,Cosmopolitan,cldIb2013,0.0,2021.402,,
+2021,Human,EHIE23290Y21,EW23,2021-06-09,267951,"Ardmore, Bukit Timah, Holland Road, Tanglin",Leedon Heights,,4.0,D2,Cosmopolitan,cldIb2013,0.0,2021.438,,
+2021,Human,EHIE26991Y21,EW26,2021-07-01,278510,"Ardmore, Bukit Timah, Holland Road, Tanglin",Jalan Hitam Manis,,5.0,D2,Cosmopolitan,cldIb2013,3.0,2021.498,,
+2021,Human,EHIE1926Y21,EW01,6/1/21,208557.0,Little India,King George's Avenue,,3.0,DEN-3,Genotype III,cldIII2015,0.0,2021.013889,1.30827683647697,103.860070008008
+2021,Human,EHIE7100Y21,EW07,16/2/21,518133.0,"Tampines, Pasir Ris",Pasir Ris Grove,,4.0,DEN-3,Genotype III,cldV2017,0.0,2021.125,1.37105349951674,103.945291338516
+2021,Human,EHIE9416Y21,EW09,4/3/21,679974.0,"Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang",Bangkit Road,,1.0,DEN-3,Genotype III,cldV2017,0.0,2021.175,1.37768997714829,103.774106183346
+2021,Human,EHIE15102Y21,EW15,13/4/21,534840.0,"Serangoon Garden, Hougang, Punggol",Upper Paya Lebar Road,,3.0,DEN-3,Genotype III,cldV2017,15.0,2021.283333,1.34314097114111,103.882836214843
+2021,Human,EHIE18141Y21,EW18,7/5/21,0.0,Unknown,No Address,,3.0,DEN-3,Genotype III,cldV2017,0.0,2021.35,0.0,0.0
+2021,Human,EHIE21389Y21,EW21,28/5/21,257850.0,"Ardmore, Bukit Timah, Holland Road, Tanglin",Stevens Road,,1.0,DEN-3,Genotype III,cldIII2015,0.0,2021.408333,1.31316989397542,103.828975865547
+2021,Human,EHIE22785Y21,EW22,4/6/21,258542.0,"Ardmore, Bukit Timah, Holland Road, Tanglin",Margoliouth Road,,3.0,DEN-3,Genotype III,cldIII2015,0.0,2021.425,1.31892597328933,103.824241922952
+2021,Human,EHIE23952Y21,EW23,10/6/21,258285.0,"Ardmore, Bukit Timah, Holland Road, Tanglin",Robin Close,,0.0,DEN-3,Genotype III,cldIII2015,13.0,2021.441667,1.31820521032061,103.827180640719
+2021,Human,EHIE24241Y21,EW24,14/6/21,0.0,Unknown,No Address,,0.0,DEN-3,Genotype III,cldIII2015,0.0,2021.452778,0.0,0.0
+2021,Human,EHIE25262Y21,EW25,21/6/21,0.0,Unknown,No Address,,4.0,DEN-3,Genotype III,cldV2017,0.0,2021.472222,0.0,0.0
+2021,Human,EHIE25535Y21,EW25,25/6/21,678940.0,"Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang",Hazel Park Terrace,,2.0,DEN-3,Genotype III,cldV2017,56.0,2021.483333,1.37194467499453,103.764951864708
+2021,Human,EHIE25119Y21,EW25,25/6/21,210047.0,Little India,Owen Road,,3.0,DEN-3,Genotype III,cldV2017,4.0,2021.483333,1.31536753637825,103.851515481897
+2021,Human,EHIE26535Y21,EW26,28/6/21,0.0,Unknown,No Address,,1.0,DEN-3,Genotype III,cldIII2015,0.0,2021.491667,0.0,0.0
+2021,Human,EHIE27238Y21,EW27,7/7/21,258570.0,"Ardmore, Bukit Timah, Holland Road, Tanglin",Margoliouth Road,,3.0,DEN-3,Genotype III,cldIII2015,17.0,2021.516667,1.31892597328933,103.824241922952
+2021,Human,EHIE28933Y21,EW28,15/7/21,258590.0,"Ardmore, Bukit Timah, Holland Road, Tanglin",Lewis Road,,4.0,DEN-3,Genotype III,cldIII2015,18.0,2021.538889,1.32014976000227,103.822712105555
+2021,Human,EHIE34659Y21,EW34,25/8/21,549540.0,"Serangoon Garden, Hougang, Punggol",Florence Road,,1.0,DEN-3,Genotype III,cldIII2015,6.0,2021.65,1.36563048659244,103.885922308335
+2021,Human,EHIE40357Y21,EW40,6/10/21,530630.0,"Serangoon Garden, Hougang, Punggol",Hougang Avenue 8,,5.0,DEN-3,Genotype III,cldIII2015,4.0,2021.763889,1.37475289120452,103.888245381273
+2021,Human,EHIE41841Y21,EW41,13/10/21,218580.0,Little India,Race Course Road,,2.0,DEN-3,Genotype III,cldIII2015,0.0,2021.783333,1.31168533425226,103.852993380981
+2021,Human,EHIE43326Y21,EW43,28/10/21,546040.0,"Serangoon Garden, Hougang, Punggol",Simon Lane,,3.0,DEN-3,Genotype III,cldIII2015,0.0,2021.825,1.3632275437128,103.884412113606
+2021,Human,EHIE47223Y21,EW47,23/11/21,460403.0,"Bedok, Upper East Coast, Eastwood, Kew Drive",Bedok North Avenue 3,,5.0,DEN-3,Genotype III,cldIII2015,0.0,2021.894444,1.33126962091701,103.934338586071
+2021,Human,EHIE50791Y21,EW50,14/12/21,208559.0,Little India,King George'S Avenue,,4.0,DEN-3,Genotype III,cldIII2015,0.0,2021.952778,1.30827683647697,103.860070008008
+2021,Human,EHIE1505Y21,EW01,2021-01-04,460547.0,"Bedok, Upper East Coast, Eastwood, Kew Drive",Bedok North Street 3,,3.0,D4,Genotype II,cldIV2019,29.0,2021.011,,
+2021,Human,EHIE1044Y21,EW01,2021-01-05,460543.0,"Bedok, Upper East Coast, Eastwood, Kew Drive",Bedok North Street 3,,3.0,D4,Genotype II,cldIV2019,29.0,2021.014,,
+2021,Human,EHIE1237Y21,EW01,2021-01-06,0.0,Unknown,No Address,,0.0,D4,Genotype II,cldIX2020,0.0,2021.016,,
+2021,Human,EHIE2108Y21,EW02,2021-01-11,670241.0,"Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang",Bukit Panjang Ring Road,,1.0,D4,Genotype II,cldVII2019,10.0,2021.03,,
+2021,Human,EHIE2238Y21,EW02,2021-01-11,670235.0,"Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang",Bukit Panjang Ring Road,,4.0,D4,Genotype II,cldVII2019,10.0,2021.03,,
+2021,Human,EHIE2185Y21,EW02,2021-01-15,460546.0,"Bedok, Upper East Coast, Eastwood, Kew Drive",Bedok North Street 3,,4.0,D4,Genotype II,cldIV2019,39.0,2021.041,,
+2021,Human,EHIE3224Y21,EW03,2021-01-18,673443.0,"Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang",Fajar Road,,5.0,D4,Genotype II,cldIV2019,0.0,2021.049,,
+2021,Human,EHIE3969Y21,EW03,2021-01-20,277380.0,"Ardmore, Bukit Timah, Holland Road, Tanglin",Ming Teck Park,,5.0,D4,Genotype II,cldVI2019,0.0,2021.055,,
+2021,Human,EHIE3286Y21,EW03,2021-01-22,423671.0,"Katong, Joo Chiat, Amber Road",Tembeling Road,,3.0,D4,Genotype II,cldIV2019,0.0,2021.06,,
+2021,Human,EHIE4846Y21,EW04,2021-01-25,470627.0,"Bedok, Upper East Coast, Eastwood, Kew Drive",Bedok Reservoir Road,,0.0,D4,Genotype II,cldX2020,3.0,2021.068,,
+2021,Human,EHIE4162Y21,EW04,2021-01-26,534260.0,"Serangoon Garden, Hougang, Punggol",Hougang Avenue 7,,5.0,D4,Genotype II,cldVIII2020,0.0,2021.071,,
+2021,Human,EHIE5961Y21,EW05,2021-02-02,460545.0,"Bedok, Upper East Coast, Eastwood, Kew Drive",Bedok North Street 3,,2.0,D4,Genotype II,cldIV2019,62.0,2021.09,,
+2021,Human,EHIE5489Y21,EW05,2021-02-04,461045.0,"Bedok, Upper East Coast, Eastwood, Kew Drive",Chai Chee Street,,2.0,D4,Genotype II,cldIV2019,5.0,2021.096,,
+2021,Human,EHIE8451Y21,EW08,2021-02-22,670125.0,"Hillview, Dairy Farm, Bukit Panjang, Choa Chu Kang",Pending Road,,5.0,D4,Genotype II,cldVII2019,3.0,2021.145,,
+2021,Human,EHIE9714Y21,EW09,2021-03-05,530002.0,"Serangoon Garden, Hougang, Punggol",Hougang Avenue 3,,1.0,D4,Genotype II,cldVIII2020,2.0,2021.175,,
