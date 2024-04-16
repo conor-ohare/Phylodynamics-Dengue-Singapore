@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='Standard' beautistatus='' namespace="beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.base.evolution.alignment:beast.pkgmgmt:beast.base.core:beast.base.inference:beast.base.evolution.tree.coalescent:beast.pkgmgmt:beast.base.core:beast.base.inference.util:beast.evolution.nuc:beast.base.evolution.operator:beast.base.inference.operator:beast.base.evolution.sitemodel:beast.base.evolution.substitutionmodel:beast.base.evolution.likelihood" required="CoupledMCMC v1.2.1:BEAST.base v2.7.6:ORC v1.2.0:BEASTLabs v2.0.2" version="2.7">
+
+    <data>
+    </data>
+
+    <map name="Uniform" >beast.base.inference.distribution.Uniform</map>
+
+    <map name="Exponential" >beast.base.inference.distribution.Exponential</map>
+
+    <map name="LogNormal" >beast.base.inference.distribution.LogNormalDistributionModel</map>
+
+    <map name="Normal" >beast.base.inference.distribution.Normal</map>
+
+    <map name="Beta" >beast.base.inference.distribution.Beta</map>
+
+    <map name="Gamma" >beast.base.inference.distribution.Gamma</map>
+
+    <map name="LaplaceDistribution" >beast.base.inference.distribution.LaplaceDistribution</map>
+
+    <map name="prior" >beast.base.inference.distribution.Prior</map>
+
+    <map name="InverseGamma" >beast.base.inference.distribution.InverseGamma</map>
+
+    <map name="OneOnX" >beast.base.inference.distribution.OneOnX</map>
+
+    <run id="mcmcmc" spec="coupledMCMC.CoupledMCMC" chainLength="10000000" chains="4" deltaTemperature="0.05" resampleEvery="1000">
+        <state id="state" spec="State" storeEvery="5000">
+            <tree id="Tree.t:input_sequences" spec="beast.base.evolution.tree.Tree" name="stateNode">
+                <trait id="dateTrait.t:input_sequences" spec="beast.base.evolution.tree.TraitSet" traitname="date" value="LP0066Y15=2015.0,EHIE02124Y16=2016.0273224043715,LP0083Y16=2016.0273224043715,LP0095Y16=2016.0273224043715,LP0211Y16=2016.0546448087432,LP0222Y16=2016.0573770491803,LP0258Y16=2016.0573770491803,LP0199Y16=2016.0737704918035,LP0244Y16=2016.065573770492,LP0281Y16=2016.0737704918035,LP0292Y16=2016.0737704918035,LP0298Y16=2016.0765027322404,LP0305Y16=2016.0765027322404,EHIE05222Y16=2016.0874316939887,LP0348Y16=2016.092896174864,LP0431Y16=2016.1120218579235,EHIE07006Y16=2016.1338797814208,EHIE07482Y16=2016.131147540984,LP0449Y16=2016.1284153005463,LP0453Y16=2016.1284153005463,LP0468Y16=2016.1338797814208,LP0488Y16=2016.1338797814208,EHIE08252Y16=2016.1448087431693,EHIE08981Y16=2016.1448087431693,LP0503Y16=2016.142076502732,LP0505Y16=2016.142076502732,LP0518Y16=2016.1448087431693,LP0528Y16=2016.1448087431693,LP0536Y16=2016.1475409836064,LP0552Y16=2016.150273224044,LP0568Y16=2016.1530054644809,EHIE09083Y16=2016.1612021857925,LP0540Y16=2016.1666666666667,LP0607Y16=2016.1666666666667,EHIE10043Y16=2016.1830601092893,EHIE10232Y16=2016.1857923497269,EHIE10447Y16=2016.188524590164,LP0651Y16=2016.1830601092893,LP0674Y16=2016.188524590164,LP0697Y16=2016.191256830601,EHIE11055Y16=2016.2103825136608,EHIE11479Y16=2016.1994535519125,EHIE11526Y16=2016.2021857923496,LP0685Y16=2016.207650273224,LP0714Y16=2016.1994535519125,LP0742Y16=2016.204918032787,LP0746Y16=2016.204918032787,LP0747Y16=2016.207650273224,EHIE12022Y16=2016.2185792349728,EHIE12203Y16=2016.224043715847,EHIE12285Y16=2016.2185792349728,LP0770Y16=2016.2185792349728,LP0772Y16=2016.2185792349728,LP0794Y16=2016.224043715847,EHIE13140Y16=2016.2377049180327,EHIE13230Y16=2016.2431693989072,EHIE13526Y16=2016.24043715847,EHIE13938Y16=2016.2486338797808,LP0825Y16=2016.2377049180327,LP0852Y16=2016.2459016393443,LP0853Y16=2016.2459016393443,LP0861Y16=2016.2486338797808,LP0906Y16=2016.2486338797808,EHIE14158Y16=2016.2622950819675,EHIE14455Y16=2016.2650273224044,LP0871Y16=2016.254098360656,LP0898Y16=2016.254098360656,LP0905Y16=2016.254098360656,LP0914Y16=2016.254098360656,EHIE15308Y16=2016.2841530054643,EHIE15896Y16=2016.2868852459017,LP0922Y16=2016.275956284153,LP0924Y16=2016.275956284153,LP0942Y16=2016.2841530054643,EHIE16673Y16=2016.306010928961,EHIE16792Y16=2016.3032786885249,LP0921Y16=2016.295081967213,LP0960Y16=2016.2978142076504,LP0961Y16=2016.2978142076504,EHIE17113Y16=2016.3142076502727,EHIE17275Y16=2016.3169398907105,EHIE17594Y16=2016.319672131148,EHIE17728Y16=2016.3142076502727,LP0983Y16=2016.3142076502727,LP0986Y16=2016.3142076502727,LP0991Y16=2016.3142076502727,LP0992Y16=2016.3142076502727,LP1007Y16=2016.3169398907105,LP1043Y16=2016.344262295082,LP1005Y16=2016.3551912568305,LP1067Y16=2016.360655737705,LP1073Y16=2016.363387978142,LP1112Y16=2016.357923497268,EHIE20289Y16=2016.3715846994533,EHIE20297Y16=2016.3825136612024,EHIE20868Y16=2016.3715846994533,LP1094Y16=2016.377049180328,LP1077Y16=2016.4016393442623,LP1105Y16=2016.3907103825136,LP1124Y16=2016.396174863388,EHIE22125Y16=2016.4098360655737,LP1151Y16=2016.4125683060108,LP1154Y16=2016.415300546448,LP1155Y16=2016.415300546448,EHIE23983Y16=2016.4289617486336,EHIE24726Y16=2016.4535519125684,LP1184Y16=2016.448087431694,LP1188Y16=2016.450819672131,EHIE25505Y16=2016.4754098360656,LP1146Y16=2016.4699453551912,LP1209Y16=2016.467213114754,LP1212Y16=2016.467213114754,LP1220Y16=2016.4699453551912,LP1227Y16=2016.4726775956285,LP1235Y16=2016.4781420765028,EHIE26306Y16=2016.4890710382515,EHIE26810Y16=2016.4972677595629,EHIE26924Y16=2016.4918032786888,LP1250Y16=2016.4890710382515,LP1258Y16=2016.4945355191253,EHIE27254Y16=2016.5054644808745,EHIE27304Y16=2016.5054644808745,EHIE27641Y16=2016.5054644808745,LP1265Y16=2016.5054644808745,LP1266Y16=2016.5136612021856,LP1267Y16=2016.5054644808745,LP1268Y16=2016.5054644808745,LP1292Y16=2016.516393442623,EHIE28147Y16=2016.532786885246,LP1303Y16=2016.5245901639344,LP1304Y16=2016.5245901639344,LP1309Y16=2016.5273224043715,LP1319Y16=2016.532786885246,LP1322Y16=2016.535519125683,LP1324Y16=2016.535519125683,EHIE29095Y16=2016.549180327869,EHIE29656Y16=2016.5437158469945,LP1330Y16=2016.5437158469945,LP1338Y16=2016.546448087432,LP1346Y16=2016.551912568306,LP1358Y16=2016.5546448087432,EHIE30031Y16=2016.5628415300544,LP1363Y16=2016.5628415300544,LP1367Y16=2016.5628415300544,LP1370Y16=2016.5628415300544,LP1373Y16=2016.565573770492,LP1375Y16=2016.565573770492,LP1379Y16=2016.565573770492,LP1383Y16=2016.568306010929,LP1384Y16=2016.568306010929,LP1456Y16=2016.5710382513664,LP1396Y16=2016.5819672131147,LP1413Y16=2016.5901639344263,LP1419Y16=2016.592896174864,LP1442Y16=2016.5901639344263,LP1435Y16=2016.6065573770493,LP1457Y16=2016.620218579235,LP1467Y16=2016.6256830601087,LP1477Y16=2016.6284153005463,EHIE34437Y16=2016.6448087431693,EHIE34862Y16=2016.639344262295,LP1495Y16=2016.639344262295,LP1500Y16=2016.642076502732,LP1506Y16=2016.6448087431693,LP1515Y16=2016.642076502732,EHIE35069Y16=2016.669398907104,LP1474Y16=2016.6612021857925,LP1520Y16=2016.6584699453551,LP1525Y16=2016.6584699453551,LP1526Y16=2016.6584699453551,LP1535Y16=2016.6612021857925,LP1536Y16=2016.6612021857925,LP1537Y16=2016.6612021857925,LP1540Y16=2016.6639344262296,LP1544Y16=2016.6639344262296,LP1551Y16=2016.6666666666667,LP1555Y16=2016.6666666666667,LP1560Y16=2016.669398907104,LP1561Y16=2016.669398907104,EHIE36598Y16=2016.6775956284152,EHIE36727Y16=2016.6830601092893,LP1567Y16=2016.6775956284152,LP1568Y16=2016.6775956284152,LP1569Y16=2016.6775956284152,LP1584Y16=2016.6775956284152,LP1592Y16=2016.6803278688524,LP1605Y16=2016.688524590164,LP1609Y16=2016.688524590164,EHIE37226Y16=2016.704918032787,EHIE37259Y16=2016.7021857923496,EHIE37583Y16=2016.704918032787,LP1622Y16=2016.7021857923496,LP1625Y16=2016.7021857923496,LP1633Y16=2016.7021857923496,LP1636Y16=2016.7021857923496,LP1650Y16=2016.707650273224,LP1652Y16=2016.707650273224,EHIE38347Y16=2016.72131147541,LP1655Y16=2016.715846994536,LP1656Y16=2016.715846994536,LP1659Y16=2016.715846994536,LP1660Y16=2016.7185792349728,LP1663Y16=2016.726775956284,LP1666Y16=2016.72131147541,LP1779Y16=2016.724043715847,LP1651Y16=2016.7431693989072,LP1680Y16=2016.734972677596,LP1688Y16=2016.7377049180327,LP1691Y16=2016.7377049180327,LP1696Y16=2016.7431693989072,LP1698Y16=2016.7377049180327,LP1699Y16=2016.7459016393443,LP1700Y16=2016.7459016393443,LP1707Y16=2016.754098360656,LP1714Y16=2016.7568306010928,EHIE42495Y16=2016.8032786885249,LP1738Y16=2016.792349726776,LP1740Y16=2016.819672131148,LP1760Y16=2016.811475409836,EHIE44558Y16=2016.8360655737704,LP1778Y16=2016.8360655737704,LP1788Y16=2016.857923497268,LP1793Y16=2016.8688524590164,LP1798Y16=2016.8743169398904,LP1799Y16=2016.877049180328,LP1803Y16=2016.879781420765,EHIE47112Y16=2016.8879781420765,LP1809Y16=2016.8907103825136,LP1810Y16=2016.8934426229507,LP1823Y16=2016.9180327868853">
+                    <taxa id="TaxonSet.input_sequences" spec="TaxonSet">
+                        <alignment idref="input_sequences"/>
+                    </taxa>
+                </trait>
+                <taxonset idref="TaxonSet.input_sequences"/>
+            </tree>
+            <parameter id="kappa.s:input_sequences" spec="parameter.RealParameter" lower="0.0" name="stateNode">2.0</parameter>
+            <parameter id="freqParameter.s:input_sequences" spec="parameter.RealParameter" dimension="4" lower="0.0" name="stateNode" upper="1.0">0.25</parameter>
+            <parameter id="gammaShape.s:input_sequences" spec="parameter.RealParameter" lower="0.1" name="stateNode">1.0</parameter>
+            <parameter id="ORCucldMean.c:input_sequences" spec="parameter.RealParameter" name="stateNode">1.0</parameter>
+            <parameter id="ORCsigma.c:input_sequences" spec="parameter.RealParameter" lower="0.0" name="stateNode">0.2</parameter>
+            <parameter id="ORCRates.c:input_sequences" spec="parameter.RealParameter" dimension="458" lower="1.0E-100" name="stateNode">0.5</parameter>
+            <parameter id="bPopSizes.t:input_sequences" spec="parameter.RealParameter" dimension="5" lower="0.0" name="stateNode">380.0</parameter>
+            <stateNode id="bGroupSizes.t:input_sequences" spec="parameter.IntegerParameter" dimension="5">1</stateNode>
+        </state>
+        <init id="RandomTree.t:input_sequences" spec="RandomTree" estimate="false" initial="@Tree.t:input_sequences" taxa="@input_sequences">
+            <populationModel id="ConstantPopulation0.t:input_sequences" spec="ConstantPopulation">
+                <parameter id="randomPopSize.t:input_sequences" spec="parameter.RealParameter" name="popSize">1.0</parameter>
+            </populationModel>
+        </init>
+        <distribution id="posterior" spec="CompoundDistribution">
+            <distribution id="prior" spec="CompoundDistribution">
+                <distribution id="BayesianSkyline.t:input_sequences" spec="BayesianSkyline" groupSizes="@bGroupSizes.t:input_sequences" popSizes="@bPopSizes.t:input_sequences">
+                    <treeIntervals id="BSPTreeIntervals.t:input_sequences" spec="beast.base.evolution.tree.TreeIntervals" tree="@Tree.t:input_sequences"/>
+                </distribution>
+                <distribution id="MarkovChainedPopSizes.t:input_sequences" spec="distribution.MarkovChainDistribution" jeffreys="true" parameter="@bPopSizes.t:input_sequences"/>
+                <prior id="ORCRatePriorDistribution.c:input_sequences" name="distribution" x="@ORCRates.c:input_sequences">
+                    <LogNormal id="LogNormalDistributionModel.1" S="@ORCsigma.c:input_sequences" meanInRealSpace="true" name="distr">
+                        <parameter id="RealParameter.5" spec="parameter.RealParameter" estimate="false" name="M">1.0</parameter>
+                    </LogNormal>
+                </prior>
+                <prior id="ORCsigmaPrior.c:input_sequences" name="distribution" x="@ORCsigma.c:input_sequences">
+                    <Gamma id="Gamma.0" name="distr">
+                        <parameter id="RealParameter.6" spec="parameter.RealParameter" estimate="false" name="alpha">5.0</parameter>
+                        <parameter id="RealParameter.7" spec="parameter.RealParameter" estimate="false" name="beta">0.05</parameter>
+                    </Gamma>
+                </prior>
+                <prior id="ORCucldMeanPrior.c:input_sequences" name="distribution" x="@ORCucldMean.c:input_sequences">
+                    <Gamma id="Gamma.1" name="distr">
+                        <alpha id="Function$Constant.0" spec="Function$Constant" value="0.1"/>
+                        <beta id="Function$Constant.1" spec="Function$Constant" value="100.0"/>
+                    </Gamma>
+                </prior>
+                <prior id="FrequenciesPrior.s:input_sequences" name="distribution" x="@freqParameter.s:input_sequences">
+                    <distr id="Dirichlet.0" spec="distribution.Dirichlet">
+                        <parameter id="RealParameter.3" spec="parameter.RealParameter" dimension="4" estimate="false" name="alpha">4.0 4.0 4.0 4.0</parameter>
+                    </distr>
+                </prior>
+                <prior id="GammaShapePrior.s:input_sequences" name="distribution" x="@gammaShape.s:input_sequences">
+                    <Exponential id="Exponential.0" name="distr">
+                        <parameter id="RealParameter.0" spec="parameter.RealParameter" estimate="false" name="mean">1.0</parameter>
+                    </Exponential>
+                </prior>
+                <prior id="KappaPrior.s:input_sequences" name="distribution" x="@kappa.s:input_sequences">
+                    <LogNormal id="LogNormalDistributionModel.0" name="distr">
+                        <parameter id="RealParameter.1" spec="parameter.RealParameter" estimate="false" name="M">1.0</parameter>
+                        <parameter id="RealParameter.2" spec="parameter.RealParameter" estimate="false" name="S">1.25</parameter>
+                    </LogNormal>
+                </prior>
+            </distribution>
+            <distribution id="likelihood" spec="CompoundDistribution" useThreads="true">
+                <distribution id="treeLikelihood.input_sequences" spec="ThreadedTreeLikelihood" data="@input_sequences" tree="@Tree.t:input_sequences">
+                    <siteModel id="SiteModel.s:input_sequences" spec="SiteModel" gammaCategoryCount="4" shape="@gammaShape.s:input_sequences">
+                        <parameter id="mutationRate.s:input_sequences" spec="parameter.RealParameter" estimate="false" lower="0.0" name="mutationRate">1.0</parameter>
+                        <parameter id="proportionInvariant.s:input_sequences" spec="parameter.RealParameter" estimate="false" lower="0.0" name="proportionInvariant" upper="1.0">0.0</parameter>
+                        <substModel id="hky.s:input_sequences" spec="HKY" kappa="@kappa.s:input_sequences">
+                            <frequencies id="estimatedFreqs.s:input_sequences" spec="Frequencies" frequencies="@freqParameter.s:input_sequences"/>
+                        </substModel>
+                    </siteModel>
+                    <branchRateModel id="OptimisedRelaxedClock.c:input_sequences" spec="beast.base.evolution.branchratemodel.UCRelaxedClockModel" clock.rate="@ORCucldMean.c:input_sequences" rates="@ORCRates.c:input_sequences" tree="@Tree.t:input_sequences">
+                        <LogNormal id="ORCLogNormalDistributionModel.c:input_sequences" S="@ORCsigma.c:input_sequences" meanInRealSpace="true" name="distr">
+                            <parameter id="RealParameter.4" spec="parameter.RealParameter" estimate="false" name="M">1.0</parameter>
+                        </LogNormal>
+                    </branchRateModel>
+                </distribution>
+            </distribution>
+        </distribution>
+        <operator id="gammaShapeScaler.s:input_sequences" spec="AdaptableOperatorSampler" weight="0.05">
+            <parameter idref="gammaShape.s:input_sequences"/>
+            <operator id="AVMNOperator.input_sequences" spec="kernel.AdaptableVarianceMultivariateNormalOperator" allowNonsense="true" beta="0.05" burnin="400" initial="800" weight="0.1">
+                <transformations id="AVMNSumTransform.input_sequences" spec="operator.kernel.Transform$LogConstrainedSumTransform">
+                    <f idref="freqParameter.s:input_sequences"/>
+                </transformations>
+                <transformations id="AVMNLogTransform.input_sequences" spec="operator.kernel.Transform$LogTransform">
+                    <f idref="kappa.s:input_sequences"/>
+                    <f idref="gammaShape.s:input_sequences"/>
+                </transformations>
+                <transformations id="AVMNNoTransform.input_sequences" spec="operator.kernel.Transform$NoTransform">
+                    <f idref="Tree.t:input_sequences"/>
+                </transformations>
+            </operator>
+            <operator id="gammaShapeScalerX.s:input_sequences" spec="kernel.BactrianScaleOperator" parameter="@gammaShape.s:input_sequences" scaleFactor="0.5" upper="10.0" weight="0.1"/>
+        </operator>
+        <operator id="KappaScaler.s:input_sequences" spec="AdaptableOperatorSampler" weight="0.05">
+            <parameter idref="kappa.s:input_sequences"/>
+            <operator idref="AVMNOperator.input_sequences"/>
+            <operator id="KappaScalerX.s:input_sequences" spec="kernel.BactrianScaleOperator" parameter="@kappa.s:input_sequences" scaleFactor="0.1" upper="10.0" weight="0.1"/>
+        </operator>
+        <operator id="FrequenciesExchanger.s:input_sequences" spec="AdaptableOperatorSampler" weight="0.05">
+            <parameter idref="freqParameter.s:input_sequences"/>
+            <operator idref="AVMNOperator.input_sequences"/>
+            <operator id="FrequenciesExchangerX.s:input_sequences" spec="operator.kernel.BactrianDeltaExchangeOperator" delta="0.01" weight="0.1">
+                <parameter idref="freqParameter.s:input_sequences"/>
+            </operator>
+        </operator>
+        <operator id="ORCucldMeanScaler.c:input_sequences" spec="ScaleOperator" parameter="@ORCucldMean.c:input_sequences" scaleFactor="0.5" weight="3.0"/>
+        <operator id="ORC.UpDown.c:input_sequences" spec="operator.kernel.BactrianUpDownOperator" scaleFactor="0.75" weight="3.0">
+            <up idref="ORCucldMean.c:input_sequences"/>
+            <down idref="Tree.t:input_sequences"/>
+        </operator>
+        <operator id="ORCAdaptableOperatorSampler_sigma.c:input_sequences" spec="AdaptableOperatorSampler" weight="3.0">
+            <parameter idref="ORCsigma.c:input_sequences"/>
+            <operator id="ORCucldStdevScaler.c:input_sequences" spec="orc.consoperators.UcldScalerOperator" distr="@ORCLogNormalDistributionModel.c:input_sequences" rates="@ORCRates.c:input_sequences" scaleFactor="0.5" stdev="@ORCsigma.c:input_sequences" weight="1.0">
+                <kernel id="KernelDistribution$Bactrian.17" spec="operator.kernel.KernelDistribution$Bactrian"/>
+            </operator>
+            <operator id="ORCUcldStdevRandomWalk.c:input_sequences" spec="operator.kernel.BactrianRandomWalkOperator" parameter="@ORCsigma.c:input_sequences" scaleFactor="0.1" weight="1.0">
+                <kernelDistribution id="KernelDistribution$Bactrian.18" spec="operator.kernel.KernelDistribution$Bactrian"/>
+            </operator>
+            <operator id="ORCUcldStdevScale.c:input_sequences" spec="kernel.BactrianScaleOperator" parameter="@ORCsigma.c:input_sequences" scaleFactor="0.5" upper="10.0" weight="1.0">
+                <kernelDistribution id="KernelDistribution$Bactrian.19" spec="operator.kernel.KernelDistribution$Bactrian"/>
+            </operator>
+            <operator id="ORCSampleFromPriorOperator_sigma.c:input_sequences" spec="orc.operators.SampleFromPriorOperator" parameter="@ORCsigma.c:input_sequences" prior2="@ORCsigmaPrior.c:input_sequences" weight="1.0"/>
+        </operator>
+        <operator id="ORCAdaptableOperatorSampler_rates_root.c:input_sequences" spec="AdaptableOperatorSampler" weight="1.0">
+            <parameter idref="ORCRates.c:input_sequences"/>
+            <tree idref="Tree.t:input_sequences"/>
+            <operator id="ORCRootOperator1.c:input_sequences" spec="orc.consoperators.SimpleDistance" clockModel="@OptimisedRelaxedClock.c:input_sequences" rates="@ORCRates.c:input_sequences" tree="@Tree.t:input_sequences" twindowSize="0.005" weight="1.0">
+                <kernel id="KernelDistribution$Bactrian.20" spec="operator.kernel.KernelDistribution$Bactrian"/>
+            </operator>
+            <operator id="ORCRootOperator2.c:input_sequences" spec="orc.consoperators.SmallPulley" clockModel="@OptimisedRelaxedClock.c:input_sequences" dwindowSize="0.005" rates="@ORCRates.c:input_sequences" tree="@Tree.t:input_sequences" weight="1.0">
+                <kernel id="KernelDistribution$Bactrian.21" spec="operator.kernel.KernelDistribution$Bactrian"/>
+            </operator>
+        </operator>
+        <operator id="ORCAdaptableOperatorSampler_rates_internal.c:input_sequences" spec="AdaptableOperatorSampler" weight="20.0">
+            <parameter idref="ORCRates.c:input_sequences"/>
+            <tree idref="Tree.t:input_sequences"/>
+            <operator id="ORCInternalnodesOperator.c:input_sequences" spec="orc.consoperators.InConstantDistanceOperator" clockModel="@OptimisedRelaxedClock.c:input_sequences" rates="@ORCRates.c:input_sequences" tree="@Tree.t:input_sequences" twindowSize="0.005" weight="1.0">
+                <kernel id="KernelDistribution$Bactrian.22" spec="operator.kernel.KernelDistribution$Bactrian"/>
+            </operator>
+            <operator id="ORCRatesRandomWalk.c:input_sequences" spec="operator.kernel.BactrianRandomWalkOperator" parameter="@ORCRates.c:input_sequences" scaleFactor="0.1" weight="1.0">
+                <kernelDistribution id="KernelDistribution$Bactrian.23" spec="operator.kernel.KernelDistribution$Bactrian"/>
+            </operator>
+            <operator id="ORCRatesScale.c:input_sequences" spec="kernel.BactrianScaleOperator" parameter="@ORCRates.c:input_sequences" scaleFactor="0.5" upper="10.0" weight="1.0">
+                <kernelDistribution id="KernelDistribution$Bactrian.24" spec="operator.kernel.KernelDistribution$Bactrian"/>
+            </operator>
+            <operator id="ORCSampleFromPriorOperator.rates.c:input_sequences" spec="orc.operators.SampleFromPriorOperator" parameter="@ORCRates.c:input_sequences" prior2="@ORCRatePriorDistribution.c:input_sequences" weight="1.0"/>
+        </operator>
+        <operator id="ORCAdaptableOperatorSampler_NER.c:input_sequences" spec="AdaptableOperatorSampler" weight="10.0">
+            <tree idref="Tree.t:input_sequences"/>
+            <operator id="ORCNER_null.c:input_sequences" spec="Exchange" tree="@Tree.t:input_sequences" weight="1.0"/>
+            <operator id="ORCNER_dAE_dBE_dCE.c:input_sequences" spec="orc.ner.NEROperator_dAE_dBE_dCE" rates="@ORCRates.c:input_sequences" tree="@Tree.t:input_sequences" weight="1.0"/>
+            <metric id="RNNIMetric.0" spec="beastlabs.evolution.tree.RNNIMetric" taxonset="@TaxonSet.input_sequences"/>
+        </operator>
+        <operator id="BayesianSkylineBICEPSEpochTop.t:input_sequences" spec="EpochFlexOperator" scaleFactor="0.1" tree="@Tree.t:input_sequences" weight="2.0"/>
+        <operator id="BayesianSkylineBICEPSEpochAll.t:input_sequences" spec="EpochFlexOperator" fromOldestTipOnly="false" scaleFactor="0.1" tree="@Tree.t:input_sequences" weight="2.0"/>
+        <operator id="BayesianSkylineBICEPSTreeFlex.t:input_sequences" spec="TreeStretchOperator" scaleFactor="0.01" tree="@Tree.t:input_sequences" weight="2.0"/>
+        <operator id="BayesianSkylineTreeRootScaler.t:input_sequences" spec="kernel.BactrianScaleOperator" rootOnly="true" scaleFactor="0.1" tree="@Tree.t:input_sequences" upper="10.0" weight="3.0"/>
+        <operator id="BayesianSkylineUniformOperator.t:input_sequences" spec="kernel.BactrianNodeOperator" tree="@Tree.t:input_sequences" weight="30.0"/>
+        <operator id="BayesianSkylineSubtreeSlide.t:input_sequences" spec="kernel.BactrianSubtreeSlide" tree="@Tree.t:input_sequences" weight="15.0"/>
+        <operator id="BayesianSkylineNarrow.t:input_sequences" spec="Exchange" tree="@Tree.t:input_sequences" weight="15.0"/>
+        <operator id="BayesianSkylineWide.t:input_sequences" spec="Exchange" isNarrow="false" tree="@Tree.t:input_sequences" weight="3.0"/>
+        <operator id="BayesianSkylineWilsonBalding.t:input_sequences" spec="WilsonBalding" tree="@Tree.t:input_sequences" weight="3.0"/>
+        <operator id="popSizesScaler.t:input_sequences" spec="kernel.BactrianScaleOperator" parameter="@bPopSizes.t:input_sequences" upper="10.0" weight="15.0"/>
+        <operator id="groupSizesDelta.t:input_sequences" spec="operator.kernel.BactrianDeltaExchangeOperator" integer="true" weight="6.0">
+            <intparameter idref="bGroupSizes.t:input_sequences"/>
+        </operator>
+        <logger id="tracelog" spec="Logger" fileName="$(filebase).log" logEvery="1000" model="@posterior" sanitiseHeaders="true" sort="smart">
+            <log idref="posterior"/>
+            <log idref="likelihood"/>
+            <log idref="prior"/>
+            <log idref="treeLikelihood.input_sequences"/>
+            <log id="TreeHeight.t:input_sequences" spec="beast.base.evolution.tree.TreeStatLogger" tree="@Tree.t:input_sequences"/>
+            <log idref="kappa.s:input_sequences"/>
+            <log idref="freqParameter.s:input_sequences"/>
+            <log idref="gammaShape.s:input_sequences"/>
+            <log idref="ORCucldMean.c:input_sequences"/>
+            <log idref="ORCsigma.c:input_sequences"/>
+            <log id="ORCRatesStat.c:input_sequences" spec="beast.base.evolution.RateStatistic" branchratemodel="@OptimisedRelaxedClock.c:input_sequences" tree="@Tree.t:input_sequences"/>
+            <log idref="BayesianSkyline.t:input_sequences"/>
+            <log idref="bPopSizes.t:input_sequences"/>
+            <log idref="bGroupSizes.t:input_sequences"/>
+        </logger>
+        <logger id="screenlog" spec="Logger" logEvery="1000">
+            <log idref="posterior"/>
+            <log idref="likelihood"/>
+            <log idref="prior"/>
+        </logger>
+        <logger id="treelog.t:input_sequences" spec="Logger" fileName="$(filebase)-$(tree).trees" logEvery="1000" mode="tree">
+            <log id="TreeWithMetaDataLogger.t:input_sequences" spec="beast.base.evolution.TreeWithMetaDataLogger" branchratemodel="@OptimisedRelaxedClock.c:input_sequences" tree="@Tree.t:input_sequences"/>
+        </logger>
+        <operatorschedule id="OperatorSchedule" spec="OperatorSchedule"/>
+    </run>
+
+</beast>
