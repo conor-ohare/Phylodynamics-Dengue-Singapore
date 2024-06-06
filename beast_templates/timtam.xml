@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='Standard' beautistatus='' namespace="beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.base.evolution.alignment:beast.pkgmgmt:beast.base.core:beast.base.inference:beast.base.evolution.tree.coalescent:beast.pkgmgmt:beast.base.core:beast.base.inference.util:beast.evolution.nuc:beast.base.evolution.operator:beast.base.inference.operator:beast.base.evolution.sitemodel:beast.base.evolution.substitutionmodel:beast.base.evolution.likelihood" required="BEAST.base v2.7.6:timtam v0.4.0" version="2.7">
+
+    <data>
+</data>
+
+    <map name="Uniform" >beast.base.inference.distribution.Uniform</map>
+
+    <map name="Exponential" >beast.base.inference.distribution.Exponential</map>
+
+    <map name="LogNormal" >beast.base.inference.distribution.LogNormalDistributionModel</map>
+
+    <map name="Normal" >beast.base.inference.distribution.Normal</map>
+
+    <map name="Beta" >beast.base.inference.distribution.Beta</map>
+
+    <map name="Gamma" >beast.base.inference.distribution.Gamma</map>
+
+    <map name="LaplaceDistribution" >beast.base.inference.distribution.LaplaceDistribution</map>
+
+    <map name="prior" >beast.base.inference.distribution.Prior</map>
+
+    <map name="InverseGamma" >beast.base.inference.distribution.InverseGamma</map>
+
+    <map name="OneOnX" >beast.base.inference.distribution.OneOnX</map>
+
+    <run id="mcmc" spec="MCMC" chainLength="5000000">
+        <state id="state" spec="State" storeEvery="1000">
+            <tree id="Tree.t:input_sequences" spec="beast.base.evolution.tree.Tree" name="stateNode">
+                <trait id="dateTrait.t:input_sequences" spec="beast.base.evolution.tree.TraitSet" traitname="date" value="EHIE02124Y16=2016.027778,EHIE02362Y17=2017.027397260274">
+                    <taxa id="TaxonSet.input_sequences" spec="TaxonSet">
+                        <alignment idref="input_sequences"/>
+                    </taxa>
+                </trait>
+                <taxonset idref="TaxonSet.input_sequences"/>
+            </tree>
+            <parameter id="clockRate.c:input_sequences" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0</parameter>
+            <parameter id="TTR0.t:input_sequences" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.85</parameter>
+            <parameter id="TTPropPsi.t:input_sequences" spec="parameter.RealParameter" lower="0.0" name="stateNode" upper="1.0">0.1</parameter>
+            <parameter id="TTPropTS.t:input_sequences" spec="parameter.RealParameter" lower="0.0" name="stateNode" upper="1.0">0.4</parameter>
+        </state>
+        <init id="RandomTree.t:input_sequences" spec="RandomTree" estimate="false" initial="@Tree.t:input_sequences" taxa="@input_sequences">
+            <populationModel id="ConstantPopulation0.t:input_sequences" spec="ConstantPopulation">
+                <parameter id="randomPopSize.t:input_sequences" spec="parameter.RealParameter" name="popSize">1.0</parameter>
+            </populationModel>
+        </init>
+        <distribution id="posterior" spec="CompoundDistribution">
+            <distribution id="prior" spec="CompoundDistribution">
+                <prior id="TTPropPsiPrior.t:input_sequences" name="distribution" x="@TTPropPsi.t:input_sequences">
+                    <Beta id="Beta.0" name="distr">
+                        <parameter id="RealParameter.5" spec="parameter.RealParameter" estimate="false" name="alpha">2.0</parameter>
+                        <parameter id="RealParameter.6" spec="parameter.RealParameter" estimate="false" name="beta">2.0</parameter>
+                    </Beta>
+                </prior>
+                <prior id="TTPropTimeSeriesPrior.t:input_sequences" name="distribution" x="@TTPropTS.t:input_sequences">
+                    <Beta id="Beta.1" name="distr">
+                        <parameter id="RealParameter.7" spec="parameter.RealParameter" estimate="false" name="alpha">2.0</parameter>
+                        <parameter id="RealParameter.8" spec="parameter.RealParameter" estimate="false" name="beta">2.0</parameter>
+                    </Beta>
+                </prior>
+                <prior id="TTR0Prior.t:input_sequences" name="distribution" x="@TTR0.t:input_sequences">
+                    <Normal id="Normal.0" name="distr">
+                        <parameter id="RealParameter.1" spec="parameter.RealParameter" estimate="false" name="mean">1.0</parameter>
+                        <parameter id="RealParameter.2" spec="parameter.RealParameter" estimate="false" name="sigma">0.25</parameter>
+                    </Normal>
+                </prior>
+                <prior id="ClockPrior.c:input_sequences" name="distribution" x="@clockRate.c:input_sequences">
+                    <Uniform id="Uniform.0" name="distr" upper="Infinity"/>
+                </prior>
+            </distribution>
+            <distribution id="likelihood" spec="CompoundDistribution" useThreads="true">
+                <distribution id="treeLikelihood.input_sequences" spec="ThreadedTreeLikelihood" data="@input_sequences" tree="@Tree.t:input_sequences">
+                    <siteModel id="SiteModel.s:input_sequences" spec="SiteModel">
+                        <parameter id="mutationRate.s:input_sequences" spec="parameter.RealParameter" estimate="false" lower="0.0" name="mutationRate">1.0</parameter>
+                        <parameter id="gammaShape.s:input_sequences" spec="parameter.RealParameter" estimate="false" lower="0.1" name="shape">1.0</parameter>
+                        <parameter id="proportionInvariant.s:input_sequences" spec="parameter.RealParameter" estimate="false" lower="0.0" name="proportionInvariant" upper="1.0">0.0</parameter>
+                        <substModel id="JC69.s:input_sequences" spec="JukesCantor"/>
+                    </siteModel>
+                    <branchRateModel id="StrictClock.c:input_sequences" spec="beast.base.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:input_sequences"/>
+                </distribution>
+            </distribution>
+        </distribution>
+        <operator id="StrictClockRateScaler.c:input_sequences" spec="AdaptableOperatorSampler" weight="1.5">
+            <parameter idref="clockRate.c:input_sequences"/>
+            <operator id="AVMNOperator.input_sequences" spec="kernel.AdaptableVarianceMultivariateNormalOperator" allowNonsense="true" beta="0.05" burnin="400" initial="800" weight="0.1">
+                <transformations id="AVMNSumTransform.input_sequences" spec="operator.kernel.Transform$LogConstrainedSumTransform"/>
+                <transformations id="AVMNLogTransform.input_sequences" spec="operator.kernel.Transform$LogTransform">
+                    <f idref="clockRate.c:input_sequences"/>
+                </transformations>
+                <transformations id="AVMNNoTransform.input_sequences" spec="operator.kernel.Transform$NoTransform">
+                    <f idref="Tree.t:input_sequences"/>
+                </transformations>
+            </operator>
+            <operator id="StrictClockRateScalerX.c:input_sequences" spec="kernel.BactrianScaleOperator" parameter="@clockRate.c:input_sequences" upper="10.0" weight="3.0"/>
+        </operator>
+        <operator id="strictClockUpDownOperator.c:input_sequences" spec="AdaptableOperatorSampler" weight="1.5">
+            <parameter idref="clockRate.c:input_sequences"/>
+            <tree idref="Tree.t:input_sequences"/>
+            <operator idref="AVMNOperator.input_sequences"/>
+            <operator id="strictClockUpDownOperatorX.c:input_sequences" spec="operator.kernel.BactrianUpDownOperator" scaleFactor="0.75" weight="3.0">
+                <up idref="clockRate.c:input_sequences"/>
+                <down idref="Tree.t:input_sequences"/>
+            </operator>
+        </operator>
+        <operator id="TTR0Scaler.t:input_sequences" spec="ScaleOperator" parameter="@TTR0.t:input_sequences" scaleFactor="0.9" weight="1.0"/>
+        <operator id="TTR0Walk.t:input_sequences" spec="operator.RealRandomWalkOperator" parameter="@TTR0.t:input_sequences" weight="1.0" windowSize="0.01"/>
+        <operator id="TTPropPsiScaler.t:input_sequences" spec="ScaleOperator" parameter="@TTPropPsi.t:input_sequences" scaleFactor="0.9" weight="1.0"/>
+        <operator id="TTPropPsiWalk.t:input_sequences" spec="operator.RealRandomWalkOperator" parameter="@TTPropPsi.t:input_sequences" weight="1.0" windowSize="0.01"/>
+        <operator id="TTPropTimeSeriesScaler.t:input_sequences" spec="ScaleOperator" parameter="@TTPropTS.t:input_sequences" scaleFactor="0.9" weight="1.0"/>
+        <operator id="TTPropTimeSeriesWalk.t:input_sequences" spec="operator.RealRandomWalkOperator" parameter="@TTPropTS.t:input_sequences" weight="1.0" windowSize="0.01"/>
+        <operator id="TimTamTimeSeriesBICEPSEpochTop.t:input_sequences" spec="EpochFlexOperator" scaleFactor="0.1" tree="@Tree.t:input_sequences" weight="2.0"/>
+        <operator id="TimTamTimeSeriesBICEPSEpochAll.t:input_sequences" spec="EpochFlexOperator" fromOldestTipOnly="false" scaleFactor="0.1" tree="@Tree.t:input_sequences" weight="2.0"/>
+        <operator id="TimTamTimeSeriesBICEPSTreeFlex.t:input_sequences" spec="TreeStretchOperator" scaleFactor="0.01" tree="@Tree.t:input_sequences" weight="2.0"/>
+        <operator id="TimTamTimeSeriesTreeRootScaler.t:input_sequences" spec="kernel.BactrianScaleOperator" rootOnly="true" scaleFactor="0.1" tree="@Tree.t:input_sequences" upper="10.0" weight="3.0"/>
+        <operator id="TimTamTimeSeriesUniformOperator.t:input_sequences" spec="kernel.BactrianNodeOperator" tree="@Tree.t:input_sequences" weight="30.0"/>
+        <operator id="TimTamTimeSeriesSubtreeSlide.t:input_sequences" spec="kernel.BactrianSubtreeSlide" tree="@Tree.t:input_sequences" weight="15.0"/>
+        <operator id="TimTamTimeSeriesNarrow.t:input_sequences" spec="Exchange" tree="@Tree.t:input_sequences" weight="15.0"/>
+        <operator id="TimTamTimeSeriesWide.t:input_sequences" spec="Exchange" isNarrow="false" tree="@Tree.t:input_sequences" weight="3.0"/>
+        <operator id="TimTamTimeSeriesWilsonBalding.t:input_sequences" spec="WilsonBalding" tree="@Tree.t:input_sequences" weight="3.0"/>
+        <logger id="tracelog" spec="Logger" fileName="$(filebase).log" logEvery="100" model="@posterior" sanitiseHeaders="true" sort="smart">
+            <log idref="posterior"/>
+            <log idref="likelihood"/>
+            <log idref="prior"/>
+            <log idref="treeLikelihood.input_sequences"/>
+            <log id="TreeHeight.t:input_sequences" spec="beast.base.evolution.tree.TreeStatLogger" tree="@Tree.t:input_sequences"/>
+            <log idref="clockRate.c:input_sequences"/>
+            <log idref="TTR0.t:input_sequences"/>
+            <log idref="TTPropPsi.t:input_sequences"/>
+            <log idref="TTPropTS.t:input_sequences"/>
+        </logger>
+        <logger id="screenlog" spec="Logger" logEvery="1000">
+            <log idref="posterior"/>
+            <log idref="likelihood"/>
+            <log idref="prior"/>
+        </logger>
+        <logger id="treelog.t:input_sequences" spec="Logger" fileName="$(filebase)-$(tree).trees" logEvery="1000" mode="tree">
+            <log id="TreeWithMetaDataLogger.t:input_sequences" spec="beast.base.evolution.TreeWithMetaDataLogger" tree="@Tree.t:input_sequences"/>
+        </logger>
+        <operatorschedule id="OperatorSchedule" spec="OperatorSchedule"/>
+    </run>
+
+</beast>

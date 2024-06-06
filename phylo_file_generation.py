@@ -5,6 +5,12 @@ import os
 from datetime import datetime, timedelta
 import subprocess
 import xml.etree.ElementTree as ET
+import xml.dom.minidom
+from concurrent.futures import ProcessPoolExecutor
+from project_filters import project_filters
+from lxml import etree
+import re
+
 
 # ---------------------------------------------------------------------------------
 # INPUT DATA FILTERING CRITERIA
@@ -12,39 +18,39 @@ import xml.etree.ElementTree as ET
 
 existing_project = None # e.g. data_20240416-135805
 
-# Define criteria for selecting sample data
-project_filters = {
-    "Year": [2017],  # Only include samples from these years
-    "Serotype": ['DEN-3']
-    # "Sample origin": "Human" # Only include samples originating from humans
-    # Expand with additional criteria as necessary
-}
-
 # Select the previous year to use as a reference for analysis
 # Change to another previous year if required
-analysis_reference_year = project_filters["Year"][0] - 1
+lower_bound_year = datetime.strptime(project_filters["Receipt date (Diagnostics)"][0], "%Y-%m-%d")
+upper_bound_year = datetime.strptime(project_filters["Receipt date (Diagnostics)"][-1], "%Y-%m-%d")
+analysis_reference_year = lower_bound_year.replace(year=lower_bound_year.year - 1).year
+
 
 beast = True
-tfptree = True
+tfptree = False
 
 # If using, BEAST parameters
+
+beast_version = 'beast2' # beast1 or beast2 
 
 # To add: Available priors
 # ----------------
 # - Coalescent Exponential Population (exponential)
 # - Coalescent Bayesian Skyline (skyline)
 # - Coalescent Extended Bayesian Skyline (extended_skyline) NOT YET WORKING
+# - Coalescent Bayesian SkyGrid (skygrid)
 
 prior_xml_dict = {'exponential': 'beast_templates/coalescent_exponential.xml',
                   'skyline': 'beast_templates/bayesian_skyline.xml',
-                  'extended_skyline': 'beast_templates/extended_bayesian_skyline.xml'}
+                  'extended_skyline': 'beast_templates/extended_bayesian_skyline.xml',
+                  'skygrid': 'beast_templates/bayesian_skygrid.xml',
+                  'timtam': 'beast_templates/timtam.xml'}
 
-prior = 'skyline'
+prior = 'timtam'
 
 # MCMC
-chainLength = 1000
+chainLength = 100000
 no_chains = 4
-sample_every = 100
+sample_every = 1000
 
 # ----------------
 
@@ -74,6 +80,9 @@ def filter_dataframe(df, filters):
             if isinstance(criteria, list):
                 # If the criteria is a list, filter to include any of the values in the list
                 filtered_df = filtered_df[filtered_df[column].isin(criteria)]
+            elif isinstance(criteria, tuple) and len(criteria) == 2:
+                # If the criteria is a tuple and has two elements, interpret as a date range
+                filtered_df = filtered_df[(filtered_df[column] >= criteria[0]) & (filtered_df[column] <= criteria[1])]
             else:
                 # If the criteria is a single value, filter based on that value
                 filtered_df = filtered_df[filtered_df[column] == criteria]
@@ -132,6 +141,39 @@ def create_districts_file(csv_file_path, output_folder, output_file_name):
 
     # Save the DataFrame to a text file, tab-separated, including the header
     districts_df.to_csv(output_path, sep='\t', index=False, header=True)
+
+
+# Function to check if 'history' is in any text
+def contains_history(text):
+    return 'history' in text.lower()
+
+def remove_history_tags(xml_file):
+    # Parse the XML file
+    parser = etree.XMLParser(remove_blank_text=True)
+    tree = etree.parse(xml_file, parser)
+    root = tree.getroot()
+
+    # Create a list to hold elements to remove
+    elements_to_remove = []
+
+    # Traverse all elements in the tree
+    for elem in root.iter():
+        # Check element's tag and attributes for 'history'
+        if contains_history(elem.tag) or any(contains_history(attr) for attr in elem.attrib.values()):
+            elements_to_remove.append(elem)
+        # Check all children as well
+        for child in elem:
+            if contains_history(child.tag) or any(contains_history(attr) for attr in child.attrib.values()):
+                elements_to_remove.append(child)
+
+    # Remove identified elements
+    for elem in elements_to_remove:
+        parent = elem.getparent()
+        if parent is not None:
+            parent.remove(elem)
+
+    # Save the modified tree back to a file or return as a string
+    tree.write('modified_beast_template.xml', pretty_print=True)  # or return etree.tostring(root, pretty_print=True)
 
 
 def tree_generation(samples_df, tree_sizes, first_date, last_date):
@@ -406,10 +448,9 @@ def file_generation(samples_df, project_dir, find_reference = True,
         os.makedirs(f"{project_dir}/tfpscanner", exist_ok=True)
 
         # Extract start and end years from project filters and define the date range
-        first_year = project_filters['Year'][0]
-        last_year = project_filters['Year'][-1]
-        start_date = datetime(first_year, 1, 1)
-        end_date = datetime(last_year, 12, 31)
+
+        start_date = datetime(lower_bound_year.year, 1, 1)
+        end_date = datetime(lower_bound_year.year, 12, 31)
 
         
 
@@ -541,108 +582,253 @@ def update_beast_template_with_fasta_and_dates(fasta_file, template_file, dates_
     # Define the path for the output XML file within the new directory
     output_xml_file = os.path.join(output_directory, "modified_beast_template.xml")
 
-    # Step 1: Read and parse the dates file
-    sequence_dates = {}
-    with open(dates_file, 'r') as f:
-        for line in f:
-            parts = line.strip().split()  # Assuming the file is tab or space delimited
-            if len(parts) >= 2:
-                sequence_dates[parts[0]] = parts[1]
+    if beast_version == 'beast2': 
+        # Step 1: Read and parse the dates file
+        sequence_dates = {}
+        with open(dates_file, 'r') as f:
+            for line in f:
+                parts = line.strip().split()  # Assuming the file is tab or space delimited
+                if len(parts) >= 2:
+                    sequence_dates[parts[0]] = parts[1]
+        
+        # Construct the value string for the <trait> element
+        date_values = ','.join([f'{seq}={date}' for seq, date in sequence_dates.items()])
+
+        # Parse the FASTA file and create sequence elements
+        new_sequences = []
+        with open(fasta_file, 'r') as f:
+            sequence_id = ''
+            sequence_value = ''
+            for line in f:
+                line = line.strip()
+                if line.startswith('>'):
+                    if sequence_id and sequence_value:
+                        sequence = ET.Element('sequence')
+                        sequence.set('id', 'seq_' + sequence_id)
+                        sequence.set('spec', 'Sequence')
+                        sequence.set('taxon', sequence_id)
+                        sequence.set('totalcount', "4")
+                        sequence.set('value', sequence_value.lower())
+                        new_sequences.append(sequence)
+                    
+                    sequence_id = line[1:]
+                    sequence_value = ''
+                else:
+                    sequence_value += line
+
+            if sequence_id and sequence_value:
+                sequence = ET.Element('sequence')
+                sequence.set('id', 'seq_' + sequence_id)
+                sequence.set('spec', 'Sequence')
+                sequence.set('taxon', sequence_id)
+                sequence.set('totalcount', "4")
+                sequence.set('value', sequence_value.lower())
+                new_sequences.append(sequence)
+
+        # Parse the BEAST template file
+        tree = ET.parse(template_file)
+        root = tree.getroot()
+
+        # Find and clear the <data> element, then repopulate it
+        data_element = root.find('.//data')
+        if data_element is not None:
+            data_element.clear()
+            data_element.set('id', 'input_sequences')
+            data_element.set('spec', 'Alignment')
+            data_element.set('name', 'alignment')
+            for seq in new_sequences:
+                data_element.append(seq)
+        else:
+            print("No <data> element found in the template. Adjust the script as needed.")
+            return
+
+        # Update the <run> element attributes based on provided values
+        run_element = root.find('.//run[@id="mcmcmc"]')
+        if run_element is not None:
+            run_element.set('chainLength', str(chain_length))
+            run_element.set('chains', str(chains))
+            run_element.set('resampleEvery', str(resample_every))
+        else:
+            print("No <run> element with id='mcmcmc' found in the template. Please check your template.")
+
+        # Update the <trait> element's value attribute with dates
+        trait_element = root.find('.//trait[@id="dateTrait.t:input_sequences"]')
+        if trait_element is not None:
+            trait_element.set('value', date_values)
+        else:
+            print("No <trait> element with the specified id found. Please check your template.")
+
+        # Convert the entire tree to a string and insert newlines for readability
+        xml_string = ET.tostring(root, encoding='unicode')
+        formatted_xml_string = xml_string.replace('>', '>\n')
+
+        # Write the formatted string to the output file
+        with open(output_xml_file, 'w', encoding='UTF-8') as f:
+            f.write(formatted_xml_string)
+
+        # Usage
+        if prior == 'timtam':
+            remove_history_tags(output_xml_file)
+
+        original_directory = os.getcwd()
+        os.chdir(os.path.join(project_directory, "beast"))
+
+        # Command to run beast2
+        command = ['/Users/conor/tools/BEAST_2.7.5/bin/beast',
+                '-overwrite', 
+                    "modified_beast_template.xml"]
+        
+        try:
+            result = subprocess.run(command, check=True, stdout=subprocess.PIPE, 
+                                    stderr=subprocess.PIPE, text=True)
+            print("BEAST ran successfully.")
+            print("Output:\n", result.stdout)
+        except subprocess.CalledProcessError as e:
+            print("Error running BEAST:")
+            print(e.stderr)
+        finally:
+            # Change back to the original directory
+            os.chdir(original_directory)
     
-    # Construct the value string for the <trait> element
-    date_values = ','.join([f'{seq}={date}' for seq, date in sequence_dates.items()])
-
-    # Parse the FASTA file and create sequence elements
-    new_sequences = []
-    with open(fasta_file, 'r') as f:
-        sequence_id = ''
-        sequence_value = ''
-        for line in f:
-            line = line.strip()
-            if line.startswith('>'):
-                if sequence_id and sequence_value:
-                    sequence = ET.Element('sequence')
-                    sequence.set('id', 'seq_' + sequence_id)
-                    sequence.set('spec', 'Sequence')
-                    sequence.set('taxon', sequence_id)
-                    sequence.set('totalcount', "4")
-                    sequence.set('value', sequence_value.lower())
-                    new_sequences.append(sequence)
-                
-                sequence_id = line[1:]
-                sequence_value = ''
-            else:
-                sequence_value += line
-
-        if sequence_id and sequence_value:
-            sequence = ET.Element('sequence')
-            sequence.set('id', 'seq_' + sequence_id)
-            sequence.set('spec', 'Sequence')
-            sequence.set('taxon', sequence_id)
-            sequence.set('totalcount', "4")
-            sequence.set('value', sequence_value.lower())
-            new_sequences.append(sequence)
-
-    # Parse the BEAST template file
-    tree = ET.parse(template_file)
-    root = tree.getroot()
-
-    # Find and clear the <data> element, then repopulate it
-    data_element = root.find('.//data')
-    if data_element is not None:
-        data_element.clear()
-        data_element.set('id', 'input_sequences')
-        data_element.set('spec', 'Alignment')
-        data_element.set('name', 'alignment')
-        for seq in new_sequences:
-            data_element.append(seq)
     else:
-        print("No <data> element found in the template. Adjust the script as needed.")
-        return
+        # Step 1: Read the sampleDates.txt and create a dictionary of taxon IDs and dates
+        dates_dict = {}
+        with open(dates_file, 'r') as file:
+            for line in file:
+                parts = line.strip().split()
+                if len(parts) >= 2:
+                    taxon_id, date_value = parts[0], parts[1]
+                    dates_dict[taxon_id] = date_value
 
-    # Update the <run> element attributes based on provided values
-    run_element = root.find('.//run[@id="mcmcmc"]')
-    if run_element is not None:
-        run_element.set('chainLength', str(chain_length))
-        run_element.set('chains', str(chains))
-        run_element.set('resampleEvery', str(resample_every))
-    else:
-        print("No <run> element with id='mcmcmc' found in the template. Please check your template.")
+        # Step 2: Read the FASTA file and create a dictionary of taxon IDs and their sequences
+        sequence_dict = {}
+        for record in SeqIO.parse(fasta_file, "fasta"):
+            sequence_dict[record.id] = str(record.seq).upper()
 
-    # Update the <trait> element's value attribute with dates
-    trait_element = root.find('.//trait[@id="dateTrait.t:input_sequences"]')
-    if trait_element is not None:
-        trait_element.set('value', date_values)
-    else:
-        print("No <trait> element with the specified id found. Please check your template.")
+        # Step 3: Modify the XML file
+        tree = ET.parse(template_file)
+        root = tree.getroot()
 
-    # Convert the entire tree to a string and insert newlines for readability
-    xml_string = ET.tostring(root, encoding='unicode')
-    formatted_xml_string = xml_string.replace('>', '>\n')
+        # Update the <taxa> section
+        taxa = root.find('.//taxa')
+        if taxa is None:
+            taxa = ET.SubElement(root, 'taxa')
+        else:
+            taxa.clear()  # Clear existing entries if needed
+            taxa.attrib = {'id': 'taxa'}  # Ensure the correct attributes are set
 
-    # Write the formatted string to the output file
-    with open(output_xml_file, 'w', encoding='UTF-8') as f:
-        f.write(formatted_xml_string)
+        for taxon_id, date_value in dates_dict.items():
+            taxon_element = ET.SubElement(taxa, 'taxon', {'id': taxon_id})
+            date_element = ET.SubElement(taxon_element, 'date', {
+                'value': date_value,
+                'direction': 'forwards',
+                'units': 'years'
+            })
 
-    original_directory = os.getcwd()
-    os.chdir(os.path.join(project_directory, "beast"))
+        # Update the <alignment> section
+        alignment = root.find('.//alignment')
+        if alignment is None:
+            alignment = ET.SubElement(root, 'alignment', {'id': 'alignment', 'dataType': 'nucleotide'})
+        else:
+            alignment.clear()  # Clear existing entries if needed
+            alignment.attrib = {'id': 'alignment', 'dataType': 'nucleotide'}  # Ensure the correct attributes are set
 
-    # Command to run beast2
-    command = ['/Users/conor/tools/BEAST_2.7.5/bin/beast',
-               '-overwrite', 
-                "modified_beast_template.xml"]
-    
-    try:
-        result = subprocess.run(command, check=True, stdout=subprocess.PIPE, 
-                                stderr=subprocess.PIPE, text=True)
-        print("BEAST ran successfully.")
-        print("Output:\n", result.stdout)
-    except subprocess.CalledProcessError as e:
-        print("Error running BEAST:")
-        print(e.stderr)
-    finally:
-        # Change back to the original directory
+        for taxon_id, sequence in sequence_dict.items():
+            sequence_element = ET.SubElement(alignment, 'sequence')
+            taxon_element = ET.SubElement(sequence_element, 'taxon', {'idref': taxon_id})  # Add taxon reference first
+            taxon_element.tail = sequence  # Then set sequence text
+
+        # Step 4: Write the updated XML back to the new file
+        tree.write(f'{output_directory}/modified_beast_template.xml', encoding='utf-8', xml_declaration=True)
+
+        # Convert to a pretty-printed XML string and write to the file
+        xmlstr = xml.dom.minidom.parseString(ET.tostring(root)).toprettyxml(indent="    ")
+        with open(f'{output_directory}/modified_beast_template.xml', 'w') as f:
+            f.write(xmlstr)
+
+        original_directory = os.getcwd()
+        os.chdir(os.path.join(project_directory, "beast"))
+        beast_directory = os.getcwd()
+
+        # Command to run beast2
+        #command = ['beast',
+        #        '-overwrite', 
+        #        "../modified_beast_template.xml"]
+        
+        # Define the command and the XML file path
+        command = "beast -overwrite ../modified_beast_template.xml"
+
+        # Prepare a file with commands
+        commands_file = 'run_commands.sh'
+        with open(commands_file, 'w') as file:
+            for i in range(1, no_chains + 1):
+                chain_directory = os.path.join(os.getcwd(), f'beast_chain_{i}')
+                os.makedirs(chain_directory, exist_ok=True)
+                # Write command to file, prepending 'cd' to change directory
+                file.write(f"cd {chain_directory} && {command}\n")
+
+        # Now use GNU Parallel to run the commands in the file in parallel
+        parallel_command = f"parallel --bar < {commands_file}"
+        try:
+            # Execute GNU Parallel
+            result = subprocess.run(parallel_command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            print("Parallel execution complete. Output:\n", result.stdout)
+        except subprocess.CalledProcessError as e:
+            print("Error during parallel execution:\n", e.stderr)
+        
+        # for i in range(1, no_chains + 1):
+        #     # Create a new directory for each chain
+        #     chain_directory = os.path.join(os.getcwd(), f'beast_chain_{i}')
+        #     os.makedirs(chain_directory, exist_ok=True)
+            
+        #     # Change to the new directory to run the beast command
+        #     os.chdir(chain_directory)
+
+        #     print(chain_directory)
+
+        #     try:
+        #         result = subprocess.run(command, check=True, stdout=subprocess.PIPE, 
+        #                                 stderr=subprocess.PIPE, text=True)
+        #         print("BEAST ran successfully.")
+        #         print("Output:\n", result.stdout)
+        #     except subprocess.CalledProcessError as e:
+        #         print("Error running BEAST:")
+        #         print(e.stderr)
+        #         # Change back to the original directory after completing all iterations
+
+            # os.chdir(beast_directory)
+
+            # After parallel execution completes, collect all input_sequences.log files
+        log_files = []
+        for i in range(1, no_chains + 1):
+            chain_directory = os.path.join(os.getcwd(), f'beast_chain_{i}')
+            log_file = os.path.join(chain_directory, "input_sequences.log")
+            if os.path.exists(log_file):
+                log_files.append(log_file)
+
+        # Construct the command for logcombiner
+        if log_files:
+            logcombiner_command = f"logcombiner {' '.join(log_files)} skygrid_combined.log"
+            try:
+                # Execute logcombiner
+                logcombiner_result = subprocess.run(logcombiner_command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                print("Log files combined successfully. Output:\n", logcombiner_result.stdout)
+            except subprocess.CalledProcessError as e:
+                print("Error during logcombiner execution:\n", e.stderr)
+        else:
+            print("No log files were found to combine.")
+
+        # Delete the commands file
+        try:
+            os.remove(commands_file)
+            print("Commands file deleted successfully.")
+        except OSError as e:
+            print(f"Error deleting {commands_file}: {e.strerror}")
+
         os.chdir(original_directory)
+        
+        
+
     
 
 def tfpscanner(project):
